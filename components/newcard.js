@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput, TouchableNativeFeedback } from 'react-native'
 import { submitCard, getDecks } from '../utils/api'
+import { connect } from 'react-redux'
+import { addCardToRedux } from '../actions'
 
-export default class NewCard extends Component {
+class NewCard extends Component {
     state = {
         question: '',
         answer: ''
@@ -26,6 +28,9 @@ export default class NewCard extends Component {
         let cardKey = this.props.navigation.state.params.cardKey
 
         submitCard(cardKey, this.state.question, this.state.answer).then(() => {
+            // Update redux
+            this.props.dispatch(addCardToRedux(cardKey, this.state.question, this.state.answer))
+
             getDecks().then((data) => {
                 this.props.navigation.navigate('DeckDetailView', { deck: JSON.parse(data)[cardKey] })
             })
@@ -49,3 +54,6 @@ export default class NewCard extends Component {
         )
     }
 }
+
+// We need access to dispatch
+export default connect()(NewCard)

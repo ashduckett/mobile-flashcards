@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableNativeFeedback } from 'react-native'
-import Decks from './decks'
-import { clearLocalNotification, setLocalNotification } from '../utils/helper'
+import Decks from './Decks'
+import { clearLocalNotifications, setLocalNotification } from '../utils/helper'
 
 
 export default class QuizComplete extends Component {
     componentDidMount() {
-        clearLocalNotification().then(setLocalNotification)
+        clearLocalNotifications().then(setLocalNotification)
     }
     
     render() {

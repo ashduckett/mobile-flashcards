@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { Text, View, FlatList, TouchableNativeFeedback, StyleSheet } from 'react-native'
 import { getDecks } from '../utils/api'
 import { StackNavigator } from 'react-navigation'
-import DeckDetailView from './deckdetail'
+import DeckDetailView from './DeckDetail'
+import { connect } from 'react-redux'
+import { fetchDecks } from '../actions'
 
 class DeckListItem extends Component {
     
@@ -21,27 +23,11 @@ class DeckListItem extends Component {
     }
 }
 
-export default class Decks extends Component {
+class Decks extends Component {
     
-    state = {
-        decks: []
-    }
     
     componentDidMount() {
-        let decks = []
-        let self = this
-
-        getDecks().then(function(data) {
-            let actualObjects = JSON.parse(data)
-
-            Object.keys(actualObjects).forEach(function(key) {
-                decks.push(actualObjects[key])
-            })
-
-            self.setState({
-                decks: decks
-            })
-        })
+        this.props.dispatch(fetchDecks())
     }   
     
     renderItem = (item) => {
@@ -52,8 +38,28 @@ export default class Decks extends Component {
     render() {
         return (
             <View>
-                <FlatList data={this.state.decks} renderItem={this.renderItem} />
+                <FlatList data={this.props.decks} renderItem={this.renderItem} />
             </View>
         )
     }
 }
+
+function mapStateToProps(state) {
+    let decks = []
+
+    // Convert global state into a managable array rather than object
+    if(state.length > 0) {
+        let actualObjects = JSON.parse(state)
+        
+        Object.keys(actualObjects).forEach(function(key) {
+            decks.push(actualObjects[key])
+        })
+    }
+    
+    return {
+        decks
+    }
+}
+
+export default connect(mapStateToProps)(Decks)
+

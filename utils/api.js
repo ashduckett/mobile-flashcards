@@ -17,7 +17,7 @@ export function addDeck(deckName) {
 }
 
 export function getDecks() {
-    return AsyncStorage.getItem(DECK_STORAGE_KEY)
+    return AsyncStorage.getItem(DECK_STORAGE_KEY);
 }
 
 export function submitCard(deckKey, questionText, answerText) {
@@ -31,7 +31,6 @@ export function submitCard(deckKey, questionText, answerText) {
     // Now get the decks so we can find the one we want
     return getDecks().then(function(data) {
         let deck = JSON.parse(data)[deckKey]
-        console.log(deck)
 
         deck.questions.push(question)
 

@@ -1,27 +1,15 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableNativeFeedback } from 'react-native'
 
-
 export default class QuizPage extends Component {
+    state = {
+        question: '',
+        answer: '',
+        currentText: '',
+        toggleButtonText: '',
+        step: 0,
+    }        
     
-    constructor(props) {
-        super(props)
-        
-        this.handleToggle = this.handleToggle.bind(this)
-        this.onCorrect = this.onCorrect.bind(this)
-        this.onIncorrect = this.onIncorrect.bind(this)
-
-        this.state = {
-            question: '',
-            answer: '',
-            currentText: '',
-            toggleButtonText: '',
-            step: 0,
-            
-        }        
-    }
-
-
     componentDidMount() {
         let question = this.props.navigation.state.params.deck.questions[this.props.navigation.state.params.step]
         let answer = this.props.navigation.state.params.deck.questions[this.props.navigation.state.params.step]
@@ -35,7 +23,7 @@ export default class QuizPage extends Component {
         })
     }
 
-    handleToggle() {
+    handleToggle = () => {
         
         if(this.state.toggleButtonText === 'Answer') {
             this.setState({
@@ -50,7 +38,7 @@ export default class QuizPage extends Component {
         }
     }
 
-    onCorrect() {
+    onCorrect = () => {
         let nextStep = this.state.step + 1
         let newScore = this.props.navigation.state.params.currScore + 1
 
@@ -67,7 +55,7 @@ export default class QuizPage extends Component {
         }
     }
 
-    onIncorrect() {
+    onIncorrect = () => {
         let nextStep = this.state.step + 1
 
         if(this.state.step + 1 !== this.props.navigation.state.params.deck.questions.length) {

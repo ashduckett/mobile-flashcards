@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
 import { addDeck, getDecks } from '../utils/api'
+import { addDeckToRedux } from '../actions'
 import { AsyncStorage } from 'react-native'
+import { connect } from 'react-redux'
 
-export default class NewDeck extends Component {
+class NewDeck extends Component {
     constructor(props) {
         super(props)
-        this.handleTextChange = this.handleTextChange.bind(this)
-        this.handleSave = this.handleSave.bind(this)
     }
     
     state = {
@@ -25,14 +25,18 @@ export default class NewDeck extends Component {
         const DECK_STORAGE_KEY = 'DECK_STORAGE'
 
         addDeck(this.state.input).then(() => {
-
+            
+            
             // We are adding the deck
             getDecks().then((data) => {
+
                 this.props.navigation.navigate('DeckDetailView', { deck: JSON.parse(data)[this.state.input] })
             })
 
            
         })
+
+        this.props.dispatch(addDeckToRedux(this.state.input))
     }
   
 
@@ -51,3 +55,5 @@ export default class NewDeck extends Component {
         )
     }
 }
+
+export default connect()(NewDeck)
