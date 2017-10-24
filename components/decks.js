@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, FlatList, TouchableNativeFeedback, StyleSheet } from 'react-native'
 import { getDecks } from '../utils/api'
 import { StackNavigator } from 'react-navigation'
-import DeckDetailView from './DeckDetail'
+import DeckDetailView from './deckdetail'
 import { connect } from 'react-redux'
 import { fetchDecks } from '../actions'
 

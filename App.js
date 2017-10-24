@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation'
-import Decks from './components/Decks'
-import NewDeck from './components/NewDeck'
-import NewCard from './components/NewCard'
-import DeckDetailView from './components/DeckDetail'
-import QuizPage from './components/QuizPage'
-import QuizComplete from './components/QuizComplete'
+import Decks from './components/decks'
+import NewDeck from './components/newdeck'
+import NewCard from './components/newcard'
+import DeckDetailView from './components/deckdetail'
+import QuizPage from './components/quizpage'
+import QuizComplete from './components/quizcomplete'
 import { setLocalNotification } from './utils/helper'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'

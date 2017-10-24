@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableNativeFeedback, Animated } from 'react-native'
-import NewCard from './NewCard'
-import QuizPage from './QuizPage'
+import NewCard from './newcard'
+import QuizPage from './quizpage'
 
 export default class DeckDetail extends Component {
     state = {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableNativeFeedback } from 'react-native'
-import Decks from './Decks'
+import Decks from './decks'
 import { clearLocalNotifications, setLocalNotification } from '../utils/helper'
 
 
